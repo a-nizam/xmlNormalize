@@ -3,12 +3,9 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
-#include <QDomNode>
-#include <QDomNodeList>
 #include <QDebug>
 #include <QMessageBox>
+#include <QThread>
 
 namespace Ui {
 class MainWindow;
@@ -24,11 +21,15 @@ public:
 
 private slots:
     void on_pushButtonOpenFile_clicked();
-
     void on_pushButtonNormilize_clicked();
+    void setLabel(QString label);
+    void setProgress(int progress);
+    void showMessage(QString message);
+    void onFinished();
 
 private:
     Ui::MainWindow *ui;
+    int isNotRunning;
 };
 
 #endif // MAINWINDOW_H
