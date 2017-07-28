@@ -43,10 +43,10 @@ void Normalize::start() {
         emit sendLabel("Удаление ApplicationID");
         QDomNodeList applicationIDs = doc.elementsByTagName("ApplicationID");
         int summary = applicationIDs.size();
-        for (int i = applicationIDs.size() - 1; i >= 0; i--) {
-            applicationIDs.at(i).toElement().parentNode().removeChild(applicationIDs.at(i));
-            emit(sendProgress(((summary - i) * 100) / summary));
-        }
+//        for (int i = 1; applicationIDs.size() > 0; i++) {
+//            applicationIDs.at(0).toElement().parentNode().removeChild(applicationIDs.at(0));
+//            emit(sendProgress((i * 100) / summary));
+//        }
 
         // insert login pass info to "root"
         emit sendLabel("Добавление данных авторизации");
@@ -81,9 +81,11 @@ void Normalize::start() {
         packageData.appendChild(applications);
         QDomNodeList application = doc.elementsByTagName("Application");
         summary = application.size();
-        for (int i = application.size() - 1; i >= 0; i--) {
-            applications.appendChild(application.at(i));
-            emit(sendProgress(((summary - i) * 100) / summary));
+        qDebug() << application.size();
+        for (int i = 0; i < summary; i++) {
+            qDebug() << i;
+            applications.appendChild(application.at(0));
+            emit(sendProgress((i * 100) / summary));
         }
 
         // replace "IdentityDocumentQQ" with "IdentityDocument"
